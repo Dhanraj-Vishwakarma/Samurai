@@ -1,0 +1,109 @@
+body {
+  background-color: #f5f5f5;
+}
+
+.hero-navbar {
+  background-color: #f7d9e1 !important;
+  padding: 0px;
+}
+
+.hero-logo {
+  padding: 16px;
+  border-right: white 2px solid;
+}
+
+.hero-text {
+  margin-left: 20px;
+}
+
+.hero-nav-item {
+  padding: 16px;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 400;
+}
+
+.user-pill .nav-item {
+  margin: 0px 15px;
+  padding-bottom: 8px;
+  cursor: pointer;
+
+  /*  */
+}
+
+.user-pill .nav-item.active {
+  border-bottom: blue 4px solid;
+}
+
+.user-profile {
+  margin: 25px;
+}
+
+.header-profile {
+  padding: 18px 25px;
+  background-color: white;
+}
+
+.profile-Edit {
+  cursor: pointer;
+  color: #af064d;
+}
+
+.text-muted {
+  color: #a5a5a5 !important;
+}
+
+.profile-card {
+  padding: 18px 25px;
+}
+
+.btn-dotted {
+  border: 1px dashed #a5a5a5;
+  background: #f5f5f5;
+  border-radius: 10px;
+  color: black;
+}
+
+.btn-dotted:hover,
+.btn-dotted:after,
+.btn-dotted:focus-visible,
+.btn-dotted:active {
+  border: 1px dashed #a5a5a5;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  color: black;
+}
+
+.date-style {
+  padding: 8px;
+  width: 100%;
+  margin: 0 3px;
+  border-color: #e1e1e1;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 425px) {
+  .hero-text {
+    font-size: 16px
+  }
+
+  .card-title {
+    font-size: 16px
+  }
+
+  .card-text {
+    font-size: 16px
+  }
+
+  .text-email {
+    font-size: 14px
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .text-email {
+    font-size: 12px
+  }
+}
