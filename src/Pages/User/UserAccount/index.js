@@ -32,7 +32,8 @@ import Dummy from "../../../assets/img/dummy-profile.png";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import UserList from "./UserList";
+// import UserData from "../../../Data/users.json";
 const UserAccount = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
@@ -43,11 +44,49 @@ const UserAccount = () => {
   const [startDate, setStartDate] = useState();
   // const [startDate, setStartDate] = useState(new Date());
   const toggleNavbar = () => setCollapsed(!collapsed);
-  const ProfileToggle = () => setProfileModal(!profileModal);
   const GenderToggle = () => setGenderModal(!genderModal);
   const birthToggle = () => setBirthModal(!birthModal);
   const addressToggle = () => setAddressModal(!addressModal);
   const phoneToggle = () => setPhoneModal(!phoneModal);
+
+  const [UserData, setUserData] = useState({
+    name: "Dave Allen",
+    gender: "Male",
+    address: "18 Address Place, St Brelade, Jersey JE3 8JU",
+    email: "daveallen@samuraikickboxing.com",
+    dob: "05/02/2023",
+    phone: "+91 123456 7890",
+  });
+  const [name, setName] = useState(UserData?.name);
+  const [email, setEmail] = useState(UserData?.email);
+  const [address, setAddress] = useState(UserData?.address);
+  const [gender, setGender] = useState(UserData?.gender);
+  const [activeTab, setActiveTab] = useState('overview');
+  const toggle = (tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  };
+  const ProfileToggle = (e) => {
+    setProfileModal(!profileModal);
+  };
+
+  const nameChange = (e) => {
+    // setUserData({ ...UserData, name: e.target.value });
+    setName(e ? e.target.value : "");
+  };
+
+  const onNameSubmit = async (e) => {
+    e.preventDefault();
+    setProfileModal(!profileModal);
+    setUserData({ ...UserData, name: name });
+  };
+
+  const onDetailSave = async (e) => {
+    e.preventDefault();
+    setAddressModal(!addressModal);
+    setUserData({ ...UserData, email: email, address: address });
+  };
+
+  console.log("🚀 ~ file: index.js:36 ~ UserData:", name);
   return (
     <React.Fragment>
       {/* Navigation bar */}
@@ -116,13 +155,21 @@ const UserAccount = () => {
         <Row>
           <Col lg="12" className="mb-4">
             <Nav className="user-pill">
-              <NavItem active>Overview</NavItem>
-              <NavItem>User Management</NavItem>
+            <NavItem active={activeTab === 'overview'}>
+                <NavLink onClick={() => toggle('overview')}>Overview</NavLink>
+              </NavItem>
+              <NavItem active={activeTab === 'user-management'}>
+                <NavLink onClick={() => toggle('user-management')}>
+                  User Management
+                </NavLink>
+              </NavItem>
+
             </Nav>
           </Col>
         </Row>
-
-        <Row className="mt-3">
+        {activeTab === 'overview' && (
+          <Row className="mt-3">
+            <Row className="mt-3">
           <Col lg="6" sm="12">
             {/* User Profile Section */}
             <Row>
@@ -140,10 +187,8 @@ const UserAccount = () => {
                     </Media>
 
                     <div>
-                      <CardTitle tag="h5">Dave Allen (Admin)</CardTitle>
-                      <p className="text-muted text-email">
-                        daveallen@samuraikickboxing.com
-                      </p>
+                      <CardTitle tag="h5">{UserData.name}</CardTitle>
+                      <p className="text-muted text-email">{UserData.email}</p>
                     </div>
                   </CardBody>
                 </Card>
@@ -174,7 +219,7 @@ const UserAccount = () => {
                         </p>
                       </Col>
                       <Col sm="8">
-                        <p>Dave Allen</p>
+                        <p>{UserData.name}</p>
                       </Col>
                     </Row>
                     <Row>
@@ -229,11 +274,7 @@ const UserAccount = () => {
                     </p>
                   </Col>
                   <Col sm="8">
-                    <p>
-                      18 Address Place,
-                      <br /> St Brelade,
-                      <br /> Jersey JE3 8JU
-                    </p>
+                    <p>{UserData.address}</p>
                   </Col>
                   <Col sm="4">
                     <p>
@@ -241,7 +282,7 @@ const UserAccount = () => {
                     </p>
                   </Col>
                   <Col sm="8">
-                    <p>daveallen@samuraikickboxing.com</p>
+                    <p> {UserData.email}</p>
                   </Col>
                   <Col sm="12" style={{ height: 350 }}></Col>
                 </Row>
@@ -256,6 +297,17 @@ const UserAccount = () => {
             </Card>
           </Col>
         </Row>
+          </Row>
+        )}
+
+        {activeTab === 'user-management' && (
+          <Row className="mt-3">
+            <Col lg="12" sm="12">
+              <UserList />
+            </Col>
+          </Row>
+        )}
+     
       </Container>
 
       {/* Profile Modal */}
@@ -265,12 +317,23 @@ const UserAccount = () => {
           <Form>
             <FormGroup>
               <Label htmlFor="name">Name</Label>
-              <Input id="name" name="name" placeholder="Name" type="text" />
+              <Input
+                id="name"
+                name={name}
+                value={name}
+                onChange={(e) => nameChange(e)}
+                placeholder="Enter Name"
+                type="text"
+              />
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button className="btn-dotted" onClick={ProfileToggle}>
+          <Button
+            className="btn-dotted"
+            type="submit"
+            onClick={(e) => onNameSubmit(e)}
+          >
             Submit
           </Button>{" "}
           <Button color="warning" onClick={ProfileToggle}>
@@ -337,19 +400,32 @@ const UserAccount = () => {
               <Label htmlFor="address">Address</Label>
               <Input
                 id="address"
-                name="address"
-                placeholder="Address"
                 type="textarea"
+                placeholder="Enter Address"
+                name={address}
+                value={address}
+                onChange={(e) => setAddress(e ? e.target.value : "")}
               />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" placeholder="Email" type="text" />
+              <Input
+                id="email"
+                name={email}
+                value={email}
+                onChange={(e) => setEmail(e ? e.target.value : "")}
+                placeholder="Enter Email"
+                type="text"
+              />
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button className="btn-dotted" onClick={addressToggle}>
+          <Button
+            className="btn-dotted"
+            type="submit"
+            onClick={(e) => onDetailSave(e)}
+          >
             Submit
           </Button>{" "}
           <Button color="warning" onClick={addressToggle}>
