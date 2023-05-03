@@ -243,9 +243,13 @@ const UserAccount = () => {
                             <p>{UserData.name} </p>
                           </Col>
                           <Col xs="6" sm="4">
-                            <p>
-                              <strong>Gender</strong>
-                            </p>
+                            {gender !== "" ? (
+                              <p>
+                                <strong>Gender</strong>
+                              </p>
+                            ) : (
+                              <p style={{ color: "#fff" }}>Gender</p>
+                            )}
                           </Col>
                           <Col xs="6" sm="8">
                             {" "}
@@ -253,15 +257,23 @@ const UserAccount = () => {
                           </Col>
 
                           <Col xs="6" sm="4">
-                            <p>
-                              <strong>Date Of Birth</strong>
-                            </p>
+                            {startDate !== "" ? (
+                              <p>
+                                <strong>Date Of Birth</strong>
+                              </p>
+                            ) : (
+                              <p style={{ color: "#fff" }}>Date Of Birth</p>
+                            )}
                           </Col>
                           <Col xs="6" sm="8">
                             {" "}
                             {startDate !== "" ? <p>{UserData.dob}</p> : ""}
                           </Col>
-                          <Col className="gap-height" sm="12" style={{ height: 80 }}></Col>
+                          <Col
+                            className="gap-height"
+                            sm="12"
+                            style={{ height: 80 }}
+                          ></Col>
                         </Row>
 
                         <Row>
@@ -328,9 +340,13 @@ const UserAccount = () => {
                         <p> {UserData.email}</p>
                       </Col>{" "}
                       <Col xs="6" sm="4">
-                        <p>
-                          <strong>Phone No.</strong>
-                        </p>
+                        {phoneNumber !== "" ? (
+                          <p>
+                            <strong>Phone No.</strong>
+                          </p>
+                        ) : (
+                          <p style={{ color: "#fff" }}>Phone No.</p>
+                        )}
                       </Col>
                       <Col xs="6" sm="8">
                         {phoneNumber !== "" ? <p> {UserData.phone}</p> : ""}
