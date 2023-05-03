@@ -83,9 +83,17 @@ body {
   border-color: #e1e1e1;
   border-radius: 10px;
 }
-td{
+
+td {
   font-weight: 600;
 }
+
+.nav-link {
+  color: black;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
 @media screen and (max-width: 425px) {
   .hero-text {
     font-size: 16px
@@ -106,6 +114,18 @@ td{
 
 @media screen and (max-width: 425px) {
   .text-email {
-    font-size: 12px
+    font-size: 10px
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cardGap {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .gap-height {
+    height: 100px !important
   }
 }
