@@ -283,7 +283,15 @@ const UserAccount = () => {
                               className="btn-dotted"
                               onClick={GenderToggle}
                             >
-                              <i className="fa-regular fa-plus"></i> Add Gender
+                              {gender !== "" ? (
+                                <>Update Gender</>
+                              ) : (
+                                <>
+                                  {" "}
+                                  <i className="fa-regular fa-plus"></i> Add
+                                  Gender
+                                </>
+                              )}
                             </Button>
                           </Col>
                           <Col sm="12" className="mt-3">
@@ -293,8 +301,14 @@ const UserAccount = () => {
                               onClick={birthToggle}
                             >
                               {" "}
-                              <i className="fa-regular fa-plus"></i> Add Date of
-                              Birth
+                              {startDate !== "" ? (
+                                <>Update Date of Birth</>
+                              ) : (
+                                <>
+                                  <i className="fa-regular fa-plus"></i> Add
+                                  Date of Birth
+                                </>
+                              )}
                             </Button>
                           </Col>
                         </Row>
@@ -360,8 +374,14 @@ const UserAccount = () => {
                           className="btn-dotted"
                           onClick={phoneToggle}
                         >
-                          <i className="fa-regular fa-plus"></i> Add Phone
-                          Number
+                          {phoneNumber !== "" ? (
+                            <> Update Phone Number</>
+                          ) : (
+                            <>
+                              <i className="fa-regular fa-plus"></i> Add Phone
+                              Number
+                            </>
+                          )}
                         </Button>
                       </Col>
                     </Row>
